@@ -1,24 +1,36 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import BookList from "./components/BookList";
 
 function App() {
+  const [books, setBooks] = useState([]);
+  const [title, setTitle] = useState("");
+  const handleChange = (event) => {
+    setTitle(event.target.value);
+  };
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    setBooks((prevState) => {
+      return [
+        ...prevState,
+        {
+          id: Math.floor((1 + Math.random()) * 2),
+          title,
+        },
+      ];
+    });
+    setTitle("");
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <form>
+        <input type="text" value={title} onChange={handleChange} />
+      </form>
+      <button onClick={handleSubmit}>Submit</button>
+      <div>
+        <BookList books={books} />
+      </div>
+    </>
   );
 }
 
