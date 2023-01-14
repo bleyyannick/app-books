@@ -1,36 +1,23 @@
 import React, { useState } from "react";
 import BookList from "./components/BookList";
+import BookCreate from "./components/BookCreate";
 
 function App() {
   const [books, setBooks] = useState([]);
-  const [title, setTitle] = useState("");
-  const handleChange = (event) => {
-    setTitle(event.target.value);
-  };
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    setBooks((prevState) => {
-      return [
-        ...prevState,
-        {
-          id: Math.floor((1 + Math.random()) * 2),
-          title,
-        },
-      ];
-    });
-    setTitle("");
+
+  const createBooks = (title) => {
+    const newBooks = [
+      ...books,
+      { id: 1.59 * Math.random() + Math.random() * 0.54, title },
+    ];
+    setBooks(newBooks);
   };
 
   return (
-    <>
-      <form>
-        <input type="text" value={title} onChange={handleChange} />
-      </form>
-      <button onClick={handleSubmit}>Submit</button>
-      <div>
-        <BookList books={books} />
-      </div>
-    </>
+    <div>
+      <BookCreate onCreate={createBooks} />
+      <BookList books={books} />
+    </div>
   );
 }
 
