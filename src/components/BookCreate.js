@@ -2,9 +2,8 @@ import React, { useState } from "react";
 
 function BookCreate({ onCreate }) {
   const [title, setTitle] = useState("");
-  const handleChange = (event) => {
-    setTitle(event.target.value);
-  };
+  const handleChange = (event) => setTitle(event.target.value);
+
   const handleSubmit = (event) => {
     event.preventDefault();
     onCreate(title);
@@ -21,7 +20,6 @@ function BookCreate({ onCreate }) {
           value={title}
           onChange={handleChange}
         />
-
         <button className="button">Cliquer</button>
       </form>
     </div>

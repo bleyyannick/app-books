@@ -1,7 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 
-function BookEdit() {
-  return <div>BookEdit</div>;
+function BookEdit({ id, editTitle, onSubmit }) {
+  const [title, setTitle] = useState(editTitle);
+  const handleChange = (e) => setTitle(e.target.value);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    onSubmit(id, title);
+  };
+  return (
+    <form className="book-edit" onSubmit={handleSubmit}>
+      <label>Title</label>
+      <input className="input" value={title} onChange={handleChange} />
+      <button className="button is-primary">Save</button>
+    </form>
+  );
 }
 
 export default BookEdit;
