@@ -1,11 +1,13 @@
-import React, { useState } from "react";
-
-function BookEdit({ id, editTitle, onSubmit }) {
-  const [title, setTitle] = useState(editTitle);
+import React, { useState, useContext } from "react";
+import BooksContext from "../context/books";
+function BookEdit({ id, oldTitle, onSubmit }) {
+  const [title, setTitle] = useState(oldTitle);
+  const { editBook } = useContext(BooksContext);
   const handleChange = (e) => setTitle(e.target.value);
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSubmit(id, title);
+    onSubmit();
+    editBook(id, title);
   };
   return (
     <form className="book-edit" onSubmit={handleSubmit}>
