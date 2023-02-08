@@ -4,10 +4,10 @@ import BookCreate from "./components/BookCreate";
 import BooksContext from "./context/books";
 
 function App() {
-  const { getBooks, books } = useContext(BooksContext);
+  const { getBooks } = useContext(BooksContext);
   useEffect(() => {
     getBooks();
-  }, [books]);
+  }, [getBooks]);
 
   return (
     <div className="app">
